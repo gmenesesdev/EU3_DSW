@@ -27,5 +27,8 @@ Route::get('/backoffice', function () {
     return view('backoffice.dashboard', ['proyectos' => $proyectos]);
 })->name('backoffice.dashboard');
 
+Route::get('/proyectos', function () {
+    return view('proyectos');
+});
 // Route::get('/backoffice/proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
 // Route::post('/backoffice/proyectos/new', [ProyectoController::class, 'create'])->name('proyectos.create');
