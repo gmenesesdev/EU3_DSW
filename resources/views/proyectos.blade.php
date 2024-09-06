@@ -101,88 +101,90 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Monto</th>
+                            <th>Activo</th>
                             <th style="width: 161px; text-align: center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($proyectos as $proyecto)
                             <tr>
-                                <th scope="row" style="text-align: center">{{ $registro->id }}</th>
+                                <th scope="row" style="text-align: center">{{ $proyecto->id }}</th>
                                 <td>
-                                    {{ $registro->nombre }}
+                                    {{ $proyecto->nombre }}
                                 </td>
                                 <td>
-                                    {{ $registro->descripcion }}
+                                    {{ $proyecto->monto }}
+                                </td>
+                                <!-- Modificar cuando ya se haya validado que el resto funcione -->
+                                <!-- <td>
+                                    {{ $proyecto->created_at }}
+                                    <label class="badge badge-dark">{{ $proyecto->user_id_create_nombre }}</label>
                                 </td>
                                 <td>
-                                    @if ($registro->imagen)
-                                        <img src="data:image/jpeg;base64,{{ base64_encode($registro->imagen) }}"
-                                            class="elevation-1" alt="logo"
-                                            style="width: auto; height: 50px; background-color: white; ">
-                                    @else
-                                        sin logo
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ $registro->created_at }}
-                                    <label class="badge badge-dark">{{ $registro->user_id_create_nombre }}</label>
-                                </td>
-                                <td>
-                                    {{ $registro->updated_at }}
-                                    <label class="badge badge-dark">{{ $registro->user_id_last_update_nombre }}</label>
-                                </td>
+                                    {{ $proyecto->updated_at }}
+                                    <label class="badge badge-dark">{{ $proyecto->user_id_last_update_nombre }}</label>
+                                </td> -->
                                 <td style="text-align: center">
-                                    {!! $registro->activo
+                                    {!! $proyecto->activo
                                         ? '<div class="badge badge-success">Activo</div>'
                                         : '<div class="badge badge-danger">Inactivo</div>' !!}
                                 </td>
-                                @if (
-                                    $rolMP[$mantenedor_id][3] == 1 ||
-                                        $rolMP[$mantenedor_id][4] == 1 ||
-                                        $rolMP[$mantenedor_id][5] == 1 ||
-                                        $rolMP[$mantenedor_id][6] == 1 ||
-                                        $rolMP[$mantenedor_id][7] == 1)
-                                    <td style="text-align: center">
-                                        {{-- 3: Ver --}}
-                                        @if ($rolMP[$mantenedor_id][3] == 1)
-                                            <button class="btn btn-{{ $privilegios[2]->color }}"
-                                                onclick="open_modal({{ $registro->id }}, 'ver')" data-toggle="modal"
-                                                data-target="#modalAcciones"><i
-                                                    class="{{ $privilegios[2]->icono }}"></i></button>
-                                        @endif
-                                        {{-- 4: Actualizar --}}
-                                        @if ($rolMP[$mantenedor_id][4] == 1)
-                                            <button class="btn btn-{{ $privilegios[3]->color }}"
-                                                onclick="open_modal({{ $registro->id }}, 'editar')" data-toggle="modal"
-                                                data-target="#modalAcciones"><i
-                                                    class="{{ $privilegios[3]->icono }}"></i></button>
-                                        @endif
+                                <td style="text-align: center">
+                                        <!-- {{-- 3: Ver --}} -->
+                                        <!-- Corregir los nombre de las clases según los privilegios -->
+                                            <!-- <button class="btn btn-{{ $privilegios[2]->color }}"-->
+                                            <button class="btn"
+                                                onclick="open_modal({{ $proyecto->id }}, 'ver')" data-toggle="modal"
+                                                data-target="#modalAcciones">
+                                                <!-- <i class="{{ $privilegios[2]->icono }}"></i> -->
+                                                <i class=""></i>
+                                            </button>
+                                        
+                                        <!-- {{-- 4: Actualizar --}} -->
+                                        
+                                            <!-- <button class="btn btn-{{ $privilegios[3]->color }}" -->
+                                            <button class="btn"
+                                                onclick="open_modal({{ $proyecto->id }}, 'editar')" data-toggle="modal"
+                                                data-target="#modalAcciones">
+                                                <!-- <i class="{{ $privilegios[3]->icono }}"></i> -->
+                                                <i class=""></i>
+                                            </button>
+                                        
                                         @if ($registro->activo)
-                                            {{-- 6: Apagar --}}
-                                            @if ($rolMP[$mantenedor_id][6] == 1)
-                                                <button class="btn btn-{{ $privilegios[5]->color }}"
-                                                    onclick="open_modal({{ $registro->id }}, 'apagar')" data-toggle="modal"
-                                                    data-target="#modalAcciones"><i
-                                                        class="{{ $privilegios[5]->icono }}"></i></button>
-                                            @endif
+                                            <!-- {{-- 6: Apagar --}} -->
+                                            
+                                                <!-- <button class="btn btn-{{ $privilegios[5]->color }}" -->
+                                                <button class="btn"
+                                                    onclick="open_modal({{ $proyecto->id }}, 'apagar')" data-toggle="modal"
+                                                    data-target="#modalAcciones">
+                                                    <!-- <i class="{{ $privilegios[5]->icono }}"></i> -->
+                                                    <i class=""></i>
+                                                </button>
+                                            
                                         @else
-                                            {{-- 5: Encender --}}
-                                            @if ($rolMP[$mantenedor_id][5] == 1)
-                                                <button class="btn btn-{{ $privilegios[4]->color }}"
-                                                    onclick="open_modal({{ $registro->id }}, 'encender')"
-                                                    data-toggle="modal" data-target="#modalAcciones"><i
-                                                        class="{{ $privilegios[4]->icono }}"></i></button>
-                                            @endif
+                                            <!-- {{-- 5: Encender --}} -->
+                                            
+                                                <!-- <button class="btn btn-{{ $privilegios[4]->color }}" -->
+                                                <button class="btn"
+                                                    onclick="open_modal({{ $proyecto->id }}, 'encender')"
+                                                    data-toggle="modal" data-target="#modalAcciones">
+                                                    <!-- <i class="{{ $privilegios[4]->icono }}"></i> -->
+                                                    <i class=""></i>
+                                                </button>
+                                            
                                         @endif
-                                        {{-- 7: Eliminar --}}
-                                        @if ($rolMP[$mantenedor_id][7] == 1)
-                                            <button class="btn btn-{{ $privilegios[6]->color }}"
+                                        <!-- {{-- 7: Eliminar --}} -->
+                                        
+                                            <!-- <button class="btn btn-{{ $privilegios[6]->color }}" -->
+                                            <button class="btn"
                                                 onclick="open_modal({{ $registro->id }}, 'eliminar')" data-toggle="modal"
-                                                data-target="#modalAcciones"><i
-                                                    class="{{ $privilegios[6]->icono }}"></i></button>
-                                        @endif
+                                                data-target="#modalAcciones">
+                                                <!-- <i class="{{ $privilegios[6]->icono }}"></i> -->
+                                                <i class=""></i>
+                                            </button>
+                                        
                                     </td>
-                                @endif
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -198,12 +200,8 @@
                 <div class="col-10">
                     <h5>
                         <i class="fas fa-plus"></i>
-                        @if ($titulo['genero'] == 'f')
-                            Nueva
-                        @else
+                        
                             Nuevo
-                        @endif
-                        {{ $titulo['singular'] }}
                     </h5>
                 </div>
                 <div class="col-2 text-end btn-cerrar">
