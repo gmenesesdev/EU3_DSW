@@ -30,7 +30,7 @@
                             <hr>
                             <div class="card-body" style="overflow-y: auto;">
                                 <div class="scroll-container">
-                                    <p class="card-text text-justify scroll-container text-center">
+                                    <p class="card-text scroll-container text-center">
                                         {{ $proyecto->descripcion }}</p>
                                 </div>
                             </div>

@@ -26,27 +26,10 @@ abstract class Controller
         //crear/actualizar proyecto por backoffice
         'proyecto_nombre.required' => 'El nombre del proyecto es obligatorio.',
         'proyecto_nombre.unique' => 'El nombre del proyecto ya existe.',
-        'proyecto_logo.required' => 'El logo es obligatorio.',
-        'proyecto_logo.image' => 'El logo debe ser una imagen.',
-        'proyecto_logo.mimes' => 'El logo debe ser un archivo de extensión: jpeg, png, jpg, gif o svg.',
-        'proyecto_logo.max' => 'El logo no debe ser mayor a 2MB.',
         'proyecto_descripcion.required' => 'La descripción del proyecto es obligatoria.',
         'proyecto_descripcion.max' => 'La descripción del proyecto no puede tener más de 1000 caracteres.',
-        //crear/actualizar mantenedor por backoffice
-        'mantenedor_nombre.required' => 'El nombre es obligatorio :(',
-        'mantenedor_nombre.unique' => 'El nombre ya existe :(',
-        //crear/actualizar privilegio por backoffice
-        'privilegio_nombre.required' => 'El nombre es obligatorio :(',
-        'privilegio_nombre.unique' => 'El nombre ya existe :(',
-        //crear/actualizar rol por backoffice
-        'rol_nombre.required' => 'El nombre es obligatorio :(',
-        'rol_nombre.unique' => 'El nombre ya existe :(',
-        'privilegios.required' => 'Debe seleccionar uno o más privilegios para el rol de usuario',
-        //crear/actualizar qr por backoffice
-        'qr_proyecto_id.required' => 'El proyecto es obligatorio :(',
-        'qr_proyecto_id.int' => 'El proyecto es un identificador :(',
-        'qr_etiqueta.required' => 'La etiqueta es obligatoria :(',
-        'qr_redireccion.required' => 'La etiqueta es obligatoria :(',
+        'proyecto_responsable.required' => 'El responsable del proyecto es obligatorio.',
+        'proyecto_responsable.max' => 'El responsable del proyecto no puede tener más de 255 caracteres.',
     ];
 
     public function getTextToast($_mantenedor, $_accion, $_estado, $_nombre, $_mensaje)

@@ -196,7 +196,7 @@ class ProyectoController extends Controller
         //busca el proyecto
         $proyecto = Proyecto::findOrFail($_id);
 
-        $datos = $_request->only('_token', 'proyecto_nombre', 'proyecto_logo', 'proyecto_descripcion');
+        $datos = $_request->only('_token', 'proyecto_nombre', 'proyecto_descripcion', 'proyecto_responsable');
 
         $cambios = 0;
 
@@ -207,6 +207,10 @@ class ProyectoController extends Controller
         }
         if ($proyecto->descripcion != $datos['proyecto_descripcion']) {
             $proyecto->descripcion = $datos['proyecto_descripcion'];
+            $cambios += 1;
+        }
+        if ($proyecto->responsable != $datos['proyecto_responsable']) {
+            $proyecto->responsable = $datos['proyecto_responsable'];
             $cambios += 1;
         }
 

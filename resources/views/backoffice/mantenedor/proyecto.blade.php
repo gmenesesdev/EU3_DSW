@@ -456,43 +456,25 @@
                                                 <label for="floatingInput${campo.id}">${campo.label}</label>
                                             </div>
                                             `;
-                                        } else if (campo.type == 'file') {
-                                            colD.innerHTML = `
-                                            <div class="form-floating mb-3">
-                                                <input type="${campo.type}" class="form-control" id="floatingInput${campo.id}" name="${titulo.singular.toLowerCase()}_${campo.name}" value="${valor}">
-                                                <label for="floatingInput${campo.id}">${campo.label}</label>
-                                            </div>
-                                            `;
                                         }
-                                        break;
-                                    case 'select':
-                                        // colD.innerHTML = `SELECT Campo: ${campo.name} Editar :${campo.inEditar}`;
-                                        opciones = '';
-                                        campo.options.forEach(opcion => {
-                                            seleccionada = valor == opcion.id ? 'selected' :
-                                                '';
-                                            opciones +=
-                                                `<option value="${opcion.id}" ${seleccionada}>${opcion.nombre}</option>`;
-                                        });
-                                        colD.innerHTML = `
-                                            <div class="form-floating mb-3">
-                                                <select class="form-select" id="floatingInput${campo.id}" aria-label="Floating label select example" name="${titulo.singular.toLowerCase()}_${campo.name}">
-                                                    ${opciones}
-                                                </select>
-                                                <label for="floatingInput${campo.id}">${campo.label}</label>
-                                            </div>
-                                            `;
                                         break;
                                     case 'textarea':
                                         colD.innerHTML = `
                                             <div class="form-floating mb-3">
-                                                <textarea id="floatingInput${campo.id}" name="{{ strtolower($titulo['name']) }}_{{ $item['name'] }}" class="form-control">${valor}</textarea>
-                                                <label for="floatingInput${campo.id}">${campo.label}</label>
+                                                <textarea class="form-control" id="floatingTextarea${campo.id}" name="${titulo.singular.toLowerCase()}_${campo.name}" style="height: 150px">${valor}</textarea>
+                                                <label for="floatingTextarea${campo.id}">${campo.label}</label>
                                             </div>
                                             `;
                                         break;
-                                        break;
-                                    default:
+                                    case 'select':
+                                        colD.innerHTML = `
+                                            <div class="form-floating mb-3">
+                                                <select class="form-select" id="floatingSelect${campo.id}" name="${titulo.singular.toLowerCase()}_${campo.name}">
+                                                    ${campo.options.map(option => `<option value="${option.id}" ${option.id == valor ? 'selected' : ''}>${option.nombre}</option>`).join('')}
+                                                </select>
+                                                <label for="floatingSelect${campo.id}">${campo.label}</label>
+                                            </div>
+                                            `;
                                         break;
                                 }
                             }
@@ -520,4 +502,3 @@
         }
     </script>
 @endsection
-
