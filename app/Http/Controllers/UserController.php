@@ -102,11 +102,12 @@ class UserController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout(Request $_request)
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');
+        $_request->session()->invalidate();
+        $_request->session()->regenerateToken();
+        return redirect()->route('user.login');
+        // return redirect()->route('raiz');
     }
 }

@@ -5,22 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proyecto extends Model
+class Privilegio extends Model
 {
     use HasFactory;
 
+    protected $table = 'privilegios';
+
+    // Campos que pueden ser asignados en masa
     protected $fillable = [
         'nombre',
-        'descripcion',
-        'responsable',
-        'monto',
+        'icono',
+        'color',
         'user_id_create',
         'user_id_last_update',
-        'activo',
+        'activo'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id_create');
-    }
 }
