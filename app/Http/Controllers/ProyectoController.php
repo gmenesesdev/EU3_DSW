@@ -46,17 +46,6 @@ class ProyectoController extends Controller
             ],
             [
                 'id' => 2,
-                'name' => 'logo',
-                'label' => 'Logo',
-                'control' => 'input',
-                'type' => 'file',
-                'required' => false,
-                'inVerEnableDisableDelete' => false,
-                'inEditar' => true,
-                'inNuevo' => true
-            ],
-            [
-                'id' => 3,
                 'name' => 'descripcion',
                 'label' => 'Descripción',
                 'control' => 'textarea',
@@ -66,6 +55,17 @@ class ProyectoController extends Controller
                 'inEditar' => true,
                 'inNuevo' => true
             ],
+            [
+                'id' => 3,
+                'name' => 'responsable',
+                'label' => 'Responsable',
+                'control' => 'input',
+                'type' => 'text',
+                'required' => false,
+                'inVerEnableDisableDelete' => true,
+                'inEditar' => true,
+                'inNuevo' => true
+            ]
         ]
     ];
 
@@ -83,7 +83,7 @@ class ProyectoController extends Controller
             $registro->user_id_create_nombre = User::findOrFail($registro->user_id_create)->nombre;
             $registro->user_id_last_update_nombre = User::findOrFail($registro->user_id_last_update)->nombre;
         }
-        
+
         return view($this->properties['view']['index'], [
             'user' => $user,
             'registros' => $datos,
@@ -100,20 +100,7 @@ class ProyectoController extends Controller
         if ($user == NULL) {
             return redirect()->route('usuario.login')->withErrors(['message' => 'No existe una sesión activa.']);
         }
-        //quita la imagen
-        if ($_id === null) {
-            $data = Proyecto::all();
-            $data->each(function ($item) {
-                if ($item->imagen) {
-                    $item->imagen = base64_encode($item->imagen);
-                }
-            });
-        } else {
-            $data = Proyecto::findOrFail($_id);
-            if ($data->imagen) {
-                $data->imagen = base64_encode($data->imagen);
-            }
-        }
+        $data = Proyecto::findOrFail($_id);
         return response()->json([
             'data' => $data
         ]);
@@ -128,19 +115,17 @@ class ProyectoController extends Controller
         // Validar la solicitud. USO DE UNIQUE: unique:tabla,campo
         $_request->validate([
             'proyecto_nombre' => 'required|string|max:255',
-            'proyecto_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'proyecto_descripcion' => 'required|string|max:1000',
+            'proyecto_responsable' => 'required|string|max:255',
         ], $this->mensajes);
 
         // Manejar la carga de la imagen
-        $image = $_request->file('proyecto_logo');
-        $imageData = file_get_contents($image);
         try {
             // Insertar el registro en la base de datos
             Proyecto::create([
                 'nombre' => $_request->proyecto_nombre,
                 'descripcion' => $_request->proyecto_descripcion,
-                'imagen' => $imageData,
+                'responsable' => $_request->proyecto_responsable,
                 'user_id_create' => $user->id,
                 'user_id_last_update' => $user->id,
             ]);
@@ -204,8 +189,8 @@ class ProyectoController extends Controller
 
         $_request->validate([
             'proyecto_nombre' => 'required|string|max:255',
-            'proyecto_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'proyecto_descripcion' => 'required|string|max:1000',
+            'proyecto_responsable' => 'required|string|max:255',
         ], $this->mensajes);
 
         //busca el proyecto
@@ -219,16 +204,6 @@ class ProyectoController extends Controller
         if ($proyecto->nombre != $datos['proyecto_nombre']) {
             $proyecto->nombre = $datos['proyecto_nombre'];
             $cambios += 1;
-        }
-        try {
-            if ($proyecto->logo != $datos['proyecto_logo']) {
-                // Manejar la carga de la imagen
-                $image = $_request->file('proyecto_logo');
-                $imageData = file_get_contents($image);
-                $proyecto->imagen = $imageData;
-                $cambios += 1;
-            }
-        } catch (\Throwable $th) {
         }
         if ($proyecto->descripcion != $datos['proyecto_descripcion']) {
             $proyecto->descripcion = $datos['proyecto_descripcion'];

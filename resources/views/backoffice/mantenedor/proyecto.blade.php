@@ -101,7 +101,6 @@
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Responsable</th>
-                            <th>Monto</th>
                             <th style="width: 200px;">Fecha Creación</th>
                             <th style="width: 200px;">Fecha Actualización</th>
                             <th style="width: 54px; text-align: center">Estado</th>
@@ -122,8 +121,6 @@
                                     {{ $registro->responsable }}
                                 </td>
                                 <td>
-                                    {{ $registro->monto }}
-                                <td>
                                     {{ $registro->created_at }}
                                     <label class="badge badge-dark">{{ $registro->user_id_create_nombre }}</label>
                                 </td>
@@ -138,39 +135,27 @@
                                 </td>
 
                                 <td style="text-align: center">
-                                    {{-- 3: Ver --}}
-
                                     <button class="btn btn-{{ $privilegios[1]->color }}"
                                         onclick="open_modal({{ $registro->id }}, 'ver')" data-toggle="modal"
-                                        data-target="#modalAcciones"><i class="{{ $privilegios[2]->icono }}"></i></button>
-
-                                    {{-- 4: Actualizar --}}
-
+                                        data-target="#modalAcciones"><i class="{{ $privilegios[1]->icono }}"></i></button>
                                     <button class="btn btn-{{ $privilegios[2]->color }}"
                                         onclick="open_modal({{ $registro->id }}, 'editar')" data-toggle="modal"
                                         data-target="#modalAcciones"><i class="{{ $privilegios[2]->icono }}"></i></button>
 
                                     @if ($registro->activo)
-                                        {{-- 6: Apagar --}}
-
                                         <button class="btn btn-{{ $privilegios[4]->color }}"
                                             onclick="open_modal({{ $registro->id }}, 'apagar')" data-toggle="modal"
                                             data-target="#modalAcciones"><i
                                                 class="{{ $privilegios[4]->icono }}"></i></button>
                                     @else
-                                        {{-- 5: Encender --}}
-
                                         <button class="btn btn-{{ $privilegios[3]->color }}"
                                             onclick="open_modal({{ $registro->id }}, 'encender')" data-toggle="modal"
                                             data-target="#modalAcciones"><i
                                                 class="{{ $privilegios[3]->icono }}"></i></button>
                                     @endif
-                                    {{-- 7: Eliminar --}}
-
                                     <button class="btn btn-{{ $privilegios[5]->color }}"
                                         onclick="open_modal({{ $registro->id }}, 'eliminar')" data-toggle="modal"
                                         data-target="#modalAcciones"><i class="{{ $privilegios[5]->icono }}"></i></button>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -213,7 +198,7 @@
 
                                 @case('textarea')
                                     <textarea id="floatingInput{{ $item['id'] }}" class="form-control" placeholder=""
-                                        id="floatingTextarea{{ $item['id'] }}" style="height: 300px"
+                                        id="floatingTextarea{{ $item['id'] }}" style="height: 150px"
                                         name="{{ strtolower($titulo['name']) }}_{{ $item['name'] }}" @if ($item['required']) required="" @endif></textarea>
                                 @break
 
@@ -535,3 +520,4 @@
         }
     </script>
 @endsection
+

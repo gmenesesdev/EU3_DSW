@@ -14,21 +14,24 @@
             @if (count($proyectos) > 0)
                 @foreach ($proyectos as $proyecto)
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                        <div class="card 
+                        <div
+                            class="card 
                 @if ($proyecto->activo) card-success @else card-danger @endif
-                card-outline"
-                            >
+                card-outline">
                             <div class="card-header text-center">
                                 <h5 style="margin-top: 13px">{{ $proyecto->nombre }}</h5>
                             </div>
                             <div class="card-body" style="overflow-y: auto;">
                                 <div class="scroll-container">
-                                    <p class="card-text text-justify scroll-container">Monto Asignado al proyecto: ${{ $proyecto->monto }}</p>
-                                    {{-- @foreach ($proyecto->qrs as $qr)
-                                <li><label class="badge badge-primary"> {{ $qr->etiqueta }}</label> - <a
-                                        href="{{ $qr->redireccion }}" target="_blank"><i class="fa fa-link"></i>
-                                        Revisar Link</a></li>
-                            @endforeach --}}
+                                    <p class="card-text text-justify scroll-container">Responsable:
+                                        {{ $proyecto->responsable }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-body" style="overflow-y: auto;">
+                                <div class="scroll-container">
+                                    <p class="card-text text-justify scroll-container text-center">
+                                        {{ $proyecto->descripcion }}</p>
                                 </div>
                             </div>
                         </div>

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nombre')->unique();
             $table->string('descripcion');
             $table->string('responsable');
-            $table->float('monto');
             $table->unsignedBigInteger('user_id_create');
             $table->unsignedBigInteger('user_id_last_update');
             // Definición de claves foráneas
@@ -32,7 +31,6 @@ return new class extends Migration
                 'nombre' => 'Proyecto 1',
                 'descripcion' => 'Descripcion 1',
                 'responsable' => 'Responsable 1',
-                'monto' => 1000,
                 'user_id_create' => 1,
                 'user_id_last_update' => 1,
                 'activo' => true,
@@ -43,7 +41,6 @@ return new class extends Migration
                 'nombre' => 'Proyecto 2',
                 'descripcion' => 'Descripcion 2',
                 'responsable' => 'Responsable 2',
-                'monto' => 2000,
                 'user_id_create' => 1,
                 'user_id_last_update' => 1,
                 'activo' => true,

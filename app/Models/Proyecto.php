@@ -13,7 +13,6 @@ class Proyecto extends Model
         'nombre',
         'descripcion',
         'responsable',
-        'monto',
         'user_id_create',
         'user_id_last_update',
         'activo',
